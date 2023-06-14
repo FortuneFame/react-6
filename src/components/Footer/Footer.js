@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
+import styles from './Footer.module.css';
 
 function Footer() {
-  const [data, setData] = useState('Initial data...');
+  const [data, setData] = useState('Initial Footer data...');
 
   useEffect(() => {
-    console.log('Footer was updated');
+    document.title = data;
   }, [data]);
 
   const handleClick = () => {
-    setData('Footer data updated...');
+    setData(`Footer data updated at ${new Date().toLocaleTimeString()}`);
   };
 
   return (
-    <div>
-      <button onClick={handleClick}>Update Data</button>
+    <div className={styles.container}>
+      <button onClick={handleClick} className={styles.button}>
+        Update Data
+      </button>
       {data}
     </div>
   );

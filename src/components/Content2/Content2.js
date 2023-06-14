@@ -1,23 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import styles from './Content2.module.css';
 
 function Content2() {
-  const [data, setData] = useState('Initial data...');
+  const [data, setData] = useState('Initial Content2 data...');
 
+  // componentDidMount equivalent
   useEffect(() => {
-    setData('Data updated with useEffect...');
-  }, []); // componentDidMount equivalent
+    setData('Content2 data updated after mounting...');
+  }, []);
 
+  // componentDidUpdate equivalent
   useEffect(() => {
-    console.log('Content2 was updated'); // componentDidUpdate equivalent
+    if (data.includes('updated')) {
+      setData(`Content2 has been updated at ${new Date().toLocaleTimeString()}`);
+    }
   }, [data]);
 
+  // componentWillUnmount equivalent
   useEffect(() => {
     return () => {
-      console.log('Content2 will unmount'); // componentWillUnmount equivalent
+      console.log('Content2 will unmount');
     };
-  }, []); // componentWillUnmount equivalent
+  }, []);
 
-  return <div>{data}</div>;
+  return <div className={styles.container}>{data}</div>;
 }
 
 export default Content2;

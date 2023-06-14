@@ -1,31 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
+import styles from './Navbar.module.css';
 
-class Navbar extends React.Component {
+class Navbar extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      data: 'Initial data...',
-    };
+    this.state = { data: 'Initial Navbar data', count: 0 };
   }
 
   componentDidMount() {
-    this.setState({ data: 'Data updated after mounting...' });
+    this.setState({ data: 'Navbar data updated after mounting', count: this.state.count + 1 });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return this.state.data !== nextState.data;
+    return nextState.data !== this.state.data || nextState.count !== this.state.count;
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log('Navbar component was updated.');
+  componentDidUpdate() {
+    if (this.state.count < 5) {
+      this.setState({data: `Navbar has been updated ${this.state.count} times`, count: this.state.count + 1})
+    }
   }
 
   componentWillUnmount() {
-    console.log('Navbar component will unmount.');
+    console.log('Navbar will unmount');
   }
 
   render() {
-    return <div>{this.state.data}</div>;
+    return <div className={styles.container}>{this.state.data}</div>;
   }
 }
 
